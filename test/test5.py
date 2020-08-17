@@ -163,6 +163,7 @@ bcd
                         * Matematyka
                         * Excel
                         * Python
+                        * Workbench
                         
                         Do zobaczenia!
                         """)
