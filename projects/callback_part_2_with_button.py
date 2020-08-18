@@ -11,12 +11,13 @@ app.layout = html.Div([
         dcc.Input(id = 'input_1', type = 'text', value = '')
     ]),
     html.Button(id = 'button_1', children = 'Submit', n_clicks = 0),
-    html.Div(id = 'div_1', children = 'Input text and press Submit'),
+    html.Div(id = 'div_1', children = 'Input text and press Submit')
 ])
 @app.callback(
     Output(component_id = 'div_1',component_property = 'children'),
     [Input(component_id= 'input_1', component_property = 'value'),
      Input(component_id = 'button_1', component_property = 'n_clicks')]
+
 
 )
 def update_output(value, n_clicks):
