@@ -11,6 +11,9 @@ df = pd.read_csv('../databasesss/graph_callback_data.csv')
 
 app = dash.Dash(__name__)
 
+# list_of_column = [col for col in df]
+# list_of_year = [year for year in df.year.unique()]
+# print(list_of_column,list_of_year)
 
 app.layout = html.Div([
     dcc.Graph(id = 'graph1'),
@@ -29,12 +32,12 @@ app.layout = html.Div([
     [Input('Slider1','value')]
 )
 def update_graph(selected_year):
-    dff = df.query(f"year == {selected_year}")
+    dff = df.query(f"year == {selected_year}") #df query służy do zapytania w prostej formie loggicznej <>=/
     traces = []
-    for cont in df.continent.unique():
-        dff_cont = dff[dff.continent == cont]
+    for cont in df.continent.unique():   #lista kontynentów ['Asia' 'Europe' 'Africa' 'Americas' 'Oceania']
+        dff_cont = dff[dff.continent == cont]  # gdy kolumna cont jest równa kontynentowi w df
         traces.append(
-            go.Scatter(
+            go.Scatter(   #ślad dla danego obiektu
                 x = dff_cont.gdpPercap,
                 y = dff_cont.lifeExp,
                 mode='markers',
@@ -46,13 +49,15 @@ def update_graph(selected_year):
                 }
             )
         )
-
-    return {'data': traces, 'layout': go.Layout(
+    return {'data': traces, 'layout': go.Layout(   #traces to lista obiektów
         title_text = 'Wykres', xaxis = {'type': 'log', 'title': 'PKB per capita'},
     yaxis={'title': 'Oczekiwana wartość zycia'}  #oś y
-    ,hovermode='closest'  #dobiera najbliższa wartosc dla wskaznika pkb per capita
+    ,hovermode='closest'  #dobiera najbliższa wahite'rtosc dla wskaznika pkb per capita
     )}
 
+##reasumując funkcja dzięki dekoratorowi jest wywoływana i dla każdego roku wybranego przez nas będzie pokazywać ślady w danym roku
+
+print(df.continent.unique())  # information for me
 
 
 
